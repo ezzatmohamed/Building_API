@@ -17,8 +17,19 @@ router.get('/:id',function(req,res){
 });
 
 router.post('/',function(req,res){
+    
+    var name = req.body.name;
+    var password = req.body.password;
+    var address = req.body.address;
+    
+    var user = {
+        name : name,
+        password : password,
+        address : address
+    };
     res.status(200).json({
-        message:'Post Works'
+        message:'Post Works',
+        user: user
     });
 });
 
