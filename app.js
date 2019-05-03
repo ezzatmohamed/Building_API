@@ -7,7 +7,7 @@ const mongo = require('mongoose');
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
-//mongo.connect('mongodb+srv://test:<test>@api-svnre.mongodb.net/test?retryWrites=true');
+mongo.connect('mongodb+srv://test:test@api-node-svnre.mongodb.net/test?retryWrites=true');
 
 
 const userApi = require('./api/routes/users');
@@ -24,7 +24,13 @@ app.use(function(req,res,next){
     }
     next();
 
-})
+});
+
+
+app.use('/api/users',userApi);
+app.use('/api/comments',commentApi);
+app.use('/api/posts',postApi);
+
 app.use(function(req,res,next){
     const error = new Error('Not FOund  !');
     error.status = 404;
@@ -39,10 +45,6 @@ app.use(function(error,req,res,next){
     });
 });
 
-
-app.use('/api/users',userApi);
-app.use('/api/comments',commentApi);
-app.use('/api/posts',postApi);
 
 
 

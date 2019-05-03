@@ -6,7 +6,17 @@ const Post = require('../models/post');
 
 
 router.get(function(req,res){
+    const post = new Post({
+        _id: new mongo.Types.ObjectId(),
+        content: req.body.content,
+        categroy: req.body.categroy
+    });
+    post.save().then(result=>{console.log(result);}).catch(error =>{ console.log(error);} );
 
+    res.status(201).json({
+        message : "created post",
+        createdPost : post         
+    })
 });
 
 router.post('/',function(req,res)
@@ -14,7 +24,7 @@ router.post('/',function(req,res)
     const post = new Post({
         _id: new mongo.Types.ObjectId(),
         content: req.body.content,
-        categroy: req.body.categroy
+        category: req.body.category
     });
     post.save().then(result=>{console.log(result);}).catch(error =>{ console.log(error);} );
 
